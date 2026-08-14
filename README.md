@@ -10,8 +10,10 @@ mkdir -p $TIhome/ti-gamd
 
 ## system preparation
 cd $TIhome/model
+
 ### A2V
 tleap -s -f tleap.in
+
 ### V2V
 tleap -s -f tleap-val1.in
 tleap -s -f tleap-combine.in
