@@ -3,7 +3,9 @@ Gaussian accelerated Molecular Dynamics – Thermodynamic Integration (GaMD-TI) 
 
 ## set home directory
 export TIhome=~/tutorials/tutorial-GaMD-TI
+
 mkdir -p $TIhome/model 
+
 mkdir -p $TIhome/ti-gamd 
 
 ## system preparation
