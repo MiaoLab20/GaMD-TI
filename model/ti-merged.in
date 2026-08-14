@@ -1,0 +1,6 @@
+parm complex.prmtop
+loadrestrt complex.inpcrd
+setOverwrite True
+tiMerge :1-3 :4-6 :2 :5
+outparm merged.parm7 merged.rst7
+quit

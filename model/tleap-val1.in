@@ -1,0 +1,8 @@
+source leaprc.protein.ff14SB
+#source leaprc.gaff
+source leaprc.water.tip3p
+loadAmberParams frcmod.ionsjc_tip3p
+a1=loadpdb dival.pdb
+saveamberparm a1 val1.prmtop val1.inpcrd
+savepdb a1 val1.pdb
+quit

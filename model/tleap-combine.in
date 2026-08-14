@@ -1,0 +1,12 @@
+source leaprc.protein.ff14SB
+#source leaprc.gaff
+source leaprc.water.tip3p
+loadAmberParams frcmod.ionsjc_tip3p
+a1=loadpdb val1.pdb
+v1=loadpdb val1.pdb
+w=loadpdb water.pdb
+com=combine{a1 v1 w}
+setbox com centers
+saveamberparm com complex.prmtop complex.inpcrd
+savepdb com complex.pdb
+quit
