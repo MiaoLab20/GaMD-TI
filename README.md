@@ -1,11 +1,6 @@
 # GaMD-TI
 Gaussian accelerated Molecular Dynamics – Thermodynamic Integration (GaMD-TI) for improved alchemical free energy calculations with enhanced sampling
 
-#########################################################
-GaMD TI Tutorial
-########################################################
-
-### Tutorial workflow
 ## set home directory
 export TIhome=~/tutorials/tutorial-GaMD-TI
 mkdir -p $TIhome/model 
@@ -13,9 +8,9 @@ mkdir -p $TIhome/ti-gamd
 
 ## system preparation
 cd $TIhome/model
-# A2V
+### A2V
 tleap -s -f tleap.in
-# V2V
+### V2V
 tleap -s -f tleap-val1.in
 tleap -s -f tleap-combine.in
 vim complex.pdb complex.prmtop [apply H-D exchange]
@@ -47,15 +42,15 @@ wc -l run_*/*/gamd-ti-energy.dat
 tail -n 1 run_*/*/gamd-ti-energy.dat
 grep -iR "k0P" */*/lambda_prod.out
 grep -iR "k0D" */*/lambda_prod.out
-# Core reweighting algorithms
+### Core reweighting algorithms
 nlen=20 # number of different simulation lengths to be used for free energy calculation
 nruns=3 # number of simulations runs
 T=300 # temperature
 python $TIhome/code/PyReweighting-GaMD-TI.py -input gamd-ti-energy.dat -method stats -T $T -nruns $nruns -nlen $nlen | tee -a PyReweighting-GaMD-TI.log
 python $TIhome/code/PyReweighting-GaMD-TI.py -input gamd-ti-energy.dat -method Gaussian -T $T -nruns $nruns -nlen $nlen | tee -a PyReweighting-GaMD-TI.log
-# python $TIhome/code/PyReweighting-GaMD-TI.py -input gamd-ti-energy.dat -method ExpAverage -T $T -nruns $nruns -nlen $nlen | tee -a PyReweighting-GaMD-TI.log [For very small boost potentials]
-# python $TIhome/code/PyReweighting-GaMD-TI.py -input gamd-ti-energy.dat -method noweight -T $T -nruns $nruns -nlen $nlen | tee -a PyReweighting-GaMD-TI.log [for cMD-TI]
+python $TIhome/code/PyReweighting-GaMD-TI.py -input gamd-ti-energy.dat -method ExpAverage -T $T -nruns $nruns -nlen $nlen | tee -a PyReweighting-GaMD-TI.log [For very small boost potentials]
+python $TIhome/code/PyReweighting-GaMD-TI.py -input gamd-ti-energy.dat -method noweight -T $T -nruns $nruns -nlen $nlen | tee -a PyReweighting-GaMD-TI.log [for cMD-TI]
 
-Outputs two files:
+(Outputs two files:
 dG-avg-gamd-ti-energy-Gaussian.xvg: average and stdev of dG values versus simulation length
-dG-mat-gamd-ti-energy-Gaussian.xvg: dG values of individual simulations versus simulation length
+dG-mat-gamd-ti-energy-Gaussian.xvg: dG values of individual simulations versus simulation length)
